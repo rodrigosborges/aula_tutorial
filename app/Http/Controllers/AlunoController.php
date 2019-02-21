@@ -36,7 +36,7 @@ class AlunoController extends Controller{
     
 	public function edit(Request $request, $id){
 		$data = [
-			"url" 	 	=> url('aluno/1'),
+			"url" 	 	=> url("aluno/$id"),
 			"button" 	=> "Atualizar",
 			"model"		=> Aluno::findOrFail($id),
 			'title'		=> "Atualizar aluno"
