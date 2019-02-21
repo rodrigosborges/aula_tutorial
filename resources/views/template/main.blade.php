@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Aula tutorial</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    @yield('style')
+
+  </head>
+
+  <body>
+      <div class="container">
+        <div class="col-md-10 offset-md-1">
+          <div class="card card-default">
+            <div class="card-header"><h3> {{ $data['title'] }} </h3></div>
+
+            <div class="card-body">
+            @yield('content')
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    @yield('js')
+  </body>
+
+</html>
