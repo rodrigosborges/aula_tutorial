@@ -7,11 +7,13 @@
   Baixar composer e instalar na pasta do php (só dar next next next):
   https://getcomposer.org/Composer-Setup.exe
 
+```
   abrir um cmd na pasta C:\xampp\htdocs
 
   composer global require laravel/installer
 
   laravel new nome_do_projeto (demora um pouco)
+```
 
   executar o comando php artisan serve para rodar o projeto no link localhost:8000
   pode abrir o localhost/nome_do-projeto/public também, funciona do mesmo jeito
@@ -26,10 +28,10 @@
 
   Executar:
 
-    ```
-      composer update
-      php artisan key:generate
-    ```
+```
+  composer update
+  php artisan key:generate
+```
 
 # Estrutura de pasta
 
@@ -46,22 +48,22 @@
 # Comandos de criação de arquivos
 
   Gerar um controller
-    ```
-    php artisan make:controller NomeAquiController
-    ```
+```
+php artisan make:controller NomeAquiController
+```
 
   Gerar um controller com estrutura para o route resource
-    ```
-    php artisan make:controller NomeAquiController --resource
-    ```
+```
+php artisan make:controller NomeAquiController --resource
+```
     
   Gerar um model
-    ```
-    php artisan make:model NomeDoModel
-    ```
+```
+php artisan make:model NomeDoModel
+```
 
   Gerar uma validação
-    ```
-    php artisan make:request NomeDaValidacao
-    ```
+```
+php artisan make:request NomeDaValidacao
+```
 
