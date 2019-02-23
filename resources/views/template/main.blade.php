@@ -14,6 +14,7 @@
 
     <!-- Bootstrap core CSS-->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
 
     <!-- Fonts -->
@@ -28,21 +29,28 @@
   </head>
 
   <body>
-      <div class="container">
-        <div class="col-md-10 offset-md-1">
-          <div class="card card-default">
-            <div class="card-header"><h3> {{ $data['title'] }} </h3></div>
+    <div class="container">
+      <div class="col-md-10 offset-md-1">
+        <div class="card card-default">
+          <div class="card-header"><h3> {{ $data['title'] }} </h3></div>
 
-            <div class="card-body">
+          <div class="card-body">
             @yield('content')
+          </div>
+          <div class="card-footer">
+            <div class="col-md-12 text-center">
+              <a href="{{ url('/') }}" class="btn btn-primary">Menu</a>
             </div>
           </div>
         </div>
+      </div>
     </div>
+    <br>
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @yield('js')
+
   </body>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+  @yield('js')
 
 </html>

@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = [
+        'title' => 'Menu'
+    ];
+    return view('welcome', compact('data'));
 });
 
 Route::resource('aluno', 'AlunoController');
+Route::resource('aula', 'AulaController');
+Route::resource('professor', 'ProfessorController');

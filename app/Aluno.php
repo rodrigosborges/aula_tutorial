@@ -11,7 +11,7 @@ class Aluno extends Model{
     protected $fillable = ['nome', 'prontuario'];
 
     public function aulas(){
-        return $this->belongsToMany('App\Aula');
+        return $this->belongsToMany('App\Aula', 'aluno_has_aula');
     }
 
     public function endereco(){

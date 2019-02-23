@@ -11,10 +11,12 @@ class AlunoController extends Controller{
 
     public function index(Request $request){
         $data = [
-			'alunos'	=> Aluno::all(),
-			'title'		=> "Lista de alunos",
+			'alunos'			=> Aluno::all(),
+			'alunos_deletados'	=> Aluno::onlyTrashed()->get(),
+			'title'				=> "Lista de alunos",
 		]; 
 			
+		//responde uma view e adiciona a variável data à ela
 	    return view('aluno.index', compact('data'));
     }
     
@@ -28,10 +30,29 @@ class AlunoController extends Controller{
 	    return view('aluno.form', compact('data'));
 	}
 
-	public function store(Request $request){
-		$aluno = Aluno::Create($request->all());
-		$aluno->endereco()->create($request->all());
-		return redirect('/aluno');
+	public function store(Requests\AlunoCreate $request){
+		//mesmo esquema do sql, espera o commit para enviar para o database
+		DB::beginTransaction();
+		try{
+			//Cria o aluno com os dados inputs
+			$aluno = Aluno::Create($request->all());
+
+			//chama o relacionamento de endereço do aluno,  e cria um endereço relacionado à ele
+			$aluno->endereco()->create($request->all());
+
+			//envia para o banco de dados
+			DB::commit();
+
+			//redireciona para uma url solicitada
+			return redirect('/aluno');
+		}catch(Exception $e){
+
+			//Não executa o sql, caso tenha dado erro
+			DB::rollback();
+
+			//Retorna pra ultima url
+			return back();
+		}
     }
     
 	public function edit(Request $request, $id){
@@ -45,10 +66,17 @@ class AlunoController extends Controller{
 	}
 	
 	public function update(Request $request, $id) {
-		$aluno = Aluno::findOrFail($id);
-		$aluno->update($request->all());
-		$aluno->endereco->update($request->all());
-	    return redirect('/aluno');
+		DB::beginTransaction();
+		try{
+			$aluno = Aluno::findOrFail($id);
+			$aluno->update($request->all());
+			$aluno->endereco->update($request->all());
+			DB::commit();
+			return redirect('/aluno');
+		}catch(Exception $e){
+			DB::rollback();
+			return back();
+		}
     }
     
 	public function show(Request $request, $id){
@@ -56,11 +84,14 @@ class AlunoController extends Controller{
 	    return view('aluno.show', [
             'model' => $aluno	    
         ]);
-    }
+	}
     
 	public function destroy(Request $request, $id) {
-		$aluno = Aluno::findOrFail($id);
-		$aluno->delete();
+		$aluno = Aluno::withTrashed()->findOrFail($id);
+		if($aluno->trashed())
+			$aluno->restore();
+		else
+			$aluno->delete();
 		return back();    
 	}
 	
