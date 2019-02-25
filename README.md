@@ -62,8 +62,13 @@ php artisan make:controller NomeAquiController --resource
 php artisan make:model NomeDoModel
 ```
 
-  Gerar uma validação
+  Gerar uma request(validação)
 ```
 php artisan make:request NomeDaValidacao
+```
+
+  Gerar um middleware(filtro de rotas)
+```
+php artisan make:middleware NomeDoMiddleware
 ```
 

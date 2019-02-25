@@ -29,8 +29,23 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container mt-5">
       <div class="col-md-10 offset-md-1">
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{session('error')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @elseif(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{session('success')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
         <div class="card card-default">
           <div class="card-header"><h3> {{ $data['title'] }} </h3></div>
 

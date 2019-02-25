@@ -44,14 +44,14 @@ class AlunoController extends Controller{
 			DB::commit();
 
 			//redireciona para uma url solicitada
-			return redirect('/aluno');
+			return redirect('/aluno')->with('success', 'Aluno cadastrado com successo');
 		}catch(Exception $e){
 
 			//Não executa o sql, caso tenha dado erro
 			DB::rollback();
 
 			//Retorna pra ultima url
-			return back();
+			return back()->with('error', 'Erro no servidor');
 		}
     }
     
@@ -72,10 +72,10 @@ class AlunoController extends Controller{
 			$aluno->update($request->all());
 			$aluno->endereco->update($request->all());
 			DB::commit();
-			return redirect('/aluno');
+			return redirect('/aluno')->with('success', 'Aluno atualizado com successo');
 		}catch(Exception $e){
 			DB::rollback();
-			return back();
+			return back()->with('error', 'Erro no servidor');
 		}
     }
     
@@ -92,7 +92,7 @@ class AlunoController extends Controller{
 			$aluno->restore();
 		else
 			$aluno->delete();
-		return back();    
+		return back()->with('success', $aluno->deleted_at ? 'Aluno deletado' : 'Aluno restaurado');    
 	}
 	
 }
